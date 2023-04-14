@@ -69,9 +69,9 @@ function Cards(props) {
             <strong>Start Date:</strong> {project.startDate}
           </p>
           {project.endDate && (
-            <p className="text-white mb-2">
-              <strong>End Date:</strong> {project.endDate}
-            </p>
+          <p className="text-white mb-2">
+        <strong>End Date:</strong> {project.endDate}
+        </p>
           )}
           {project.location && (
             <p className="text-white mb-2">

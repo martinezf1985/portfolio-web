@@ -37,7 +37,8 @@ const CertificateCard = ({ certificate }) => {
         <h3 className="text-xl font-medium mb-2">{certificate.title}</h3>
         <p className="text-white mb-4">{certificate.description}</p>
         <p className="text-white mb-2">
-          {/* <strong>ID:</strong> {certificate.id} */}
+        {certificate.id && <p className="text-white mb-2"><strong>ID:</strong> {certificate.id}</p>}
+
         </p>
       </div>
     </motion.div>
