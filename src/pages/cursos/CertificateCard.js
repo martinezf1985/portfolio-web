@@ -38,7 +38,7 @@ setError('Error al cargar la imagen'); // establecer el mensaje de error
       variants={cardVariants}
       transition={cardTransition}
     >
-      <img src={certificate.image} alt={certificate.title} className="mb-4" onError={handleOnError} />
+      <img src={certificate.image} alt={certificate.title} className="mb-4" width="100%" onError={handleOnError} />
       <div className="p-4">
         <h3 className="text-xl font-medium mb-2">{certificate.title}</h3>
         <p className="text-white mb-4">{certificate.description}</p>
