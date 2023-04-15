@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { motion } from 'framer-motion';
 
 const cardTransition = {
@@ -24,6 +24,12 @@ const cardVariants = {
 };
 
 const CertificateCard = ({ certificate }) => {
+  const [error, setError] = useState(null); // estado para manejar los errores
+
+const handleOnError = () => {
+setError('Error al cargar la imagen'); // establecer el mensaje de error
+};
+
   return (
     <motion.div
       className="certificate-card bg-black rounded-lg overflow-hidden shadow-md text-white"
@@ -32,12 +38,12 @@ const CertificateCard = ({ certificate }) => {
       variants={cardVariants}
       transition={cardTransition}
     >
-      <img src={certificate.image} alt={certificate.title} className="mb-4" />
+      <img src={certificate.image} alt={certificate.title} className="mb-4" onError={handleOnError} />
       <div className="p-4">
         <h3 className="text-xl font-medium mb-2">{certificate.title}</h3>
         <p className="text-white mb-4">{certificate.description}</p>
         <p className="text-white mb-2">
-        {certificate.id && <p className="text-white mb-2"><strong>ID:</strong> {certificate.id}</p>}
+        {certificate.id && <span className="text-white mb-2"><strong>ID:</strong> {certificate.id}</span>}
 
         </p>
       </div>

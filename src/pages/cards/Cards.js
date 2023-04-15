@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
 import { motion } from "framer-motion";
 
@@ -27,18 +27,36 @@ const cardVariants = {
 
 function Cards(props) {
   const { projects } = props;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [projectList, setProjectList] = useState(projects.slice(0, 6));
+
+  useEffect(() => {
+    const nextPage = currentPage + 1;
+    const projectsToAdd = projects.slice(currentPage * 6, nextPage * 6);
+    if (projectsToAdd.length > 0) {
+      setCurrentPage(nextPage);
+      setProjectList([...projectList, ...projectsToAdd]);
+    }
+  }, [currentPage, projects]);
 
   const handleClick = (event, link) => {
     event.preventDefault();
     window.open(link, "_blank");
   };
 
+  const handleScroll = (event) => {
+    const bottom =
+      event.target.scrollHeight - event.target.scrollTop ===
+      event.target.clientHeight;
+    if (bottom) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     
-    <div>
-  {/* <div className="flex justify-center items-center mb-10">
-    <h1 className="text-6xl font-bold text-center text-white -700 animate-pulse">Proyectos</h1>
-  </div> */}
+    <div onScroll={handleScroll}>
+  
 
   <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
     {projects.map((project) => (
@@ -71,8 +89,8 @@ function Cards(props) {
           {project.endDate && (
           <p className="text-white mb-2">
         <strong>End Date:</strong> {project.endDate}
-        </p>
-          )}
+      </p>
+  )}
           {project.location && (
             <p className="text-white mb-2">
               <strong>Location:</strong> {project.location}
