@@ -119,15 +119,13 @@
 
 
 import { motion } from "framer-motion";
+import React from "react";
 
-import React, { useState, useEffect } from "react";
-
-function Cards(props) {
-  const { projects } = props;
-  const [projectFilter, setProjectFilter] = useState(projects.slice(0, 6));
-  const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = useState(1);
+function Cards({ projects }) {
+  const [projectFilter, setProjectFilter] = React.useState([]);
+  const [page, setPage] = React.useState(1);
+  const [showLoadMoreButton, setShowLoadMoreButton] = React.useState(true);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const cardTransition = {
     type: "spring",
@@ -151,23 +149,30 @@ function Cards(props) {
     }
   };
 
-  const handleClick = (event, link) => {
-    // Agregar lógica de manejo de clics aquí si es necesario
-  };
-
-  const handleLoadMore = () => {
-    setIsLoading(true);
-    setPage(page + 1);
-  };
-
-  useEffect(() => {
-    const filteredProjects = projects.slice(0, 6 * page);
-    setProjectFilter(filteredProjects);
-    if (filteredProjects.length >= projects.length) {
+  React.useEffect(() => {
+    setProjectFilter(projects.slice(0, 6));
+    if (projects.length <= 6) {
       setShowLoadMoreButton(false);
     }
+  }, [projects]);
+
+  const handleLoadMore = async () => {
+    setIsLoading(true);
+    const nextPage = page + 1;
+    const response = await fetch(`/api/projects?page=${nextPage}`);
+    const newProjects = await response.json();
+    setProjectFilter([...projectFilter, ...newProjects]);
+    setPage(nextPage);
     setIsLoading(false);
-  }, [page, projects]);
+    if (newProjects.length === 0) {
+      setShowLoadMoreButton(false);
+    }
+  };
+
+  const handleClick = (event, link) => {
+    event.preventDefault();
+    window.open(link, "_blank");
+  };
 
   return (
     <div>
@@ -184,16 +189,19 @@ function Cards(props) {
             variants={cardVariants}
             transition={cardTransition}
             onClick={(event) => handleClick(event, project.link)}
-            aria-label={project.title}  // Agregar aria-label con la descripción del proyecto
-            title={project.title}  // Agregar title con la descripción del proyecto
+            aria-label={project.title}
+            title={project.title}
           >
-            <img src={project.image} alt={project.title} className="mb-4"/>
+            <img src={project.image} alt={project.title} className="mb-4" />
             <div className="p-4">
               <h3 className="text-xl font-medium mb-2">{project.title}</h3>
               <p className="text-white mb-4">{project.description}</p>
               <ul className="mb-4">
                 {project.technologies.map((technology) => (
-                  <li className="inline-block bg-white  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" key={technology}>
+                  <li
+                    className="inline-block bg-white  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                    key={technology}
+                  >
                     {technology}
                   </li>
                 ))}
@@ -201,34 +209,29 @@ function Cards(props) {
               <p className="text-white mb-2">
                 <strong>Start Date:</strong> {project.startDate}
               </p>
-              {project.endDate && (
-                <p className="text-white mb-2">
-                  <strong>End Date:</strong> {project.endDate}
-                </p>
-              )}
-              {project.location && (
-                <p className="text-white mb-2">
-                  <strong>Type:</strong> {project.type}
-                </p>
-              )}
             </div>
           </motion.a>
         ))}
       </div>
-      <div className="flex justify-center mt-10">
-        {showLoadMoreButton && (
-          <button
-            className
-="bg-black hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full"
-                           onClick={handleLoadMore}
-                         >
-                  {isLoading ? "Loading..." : "Load More"}
-                  </button>
-                  )}
-                  </div>
-                  </div>
-                  );
-                  }
-                  
-                  export default Cards;
-
+      {showLoadMoreButton && (
+        <motion.button
+          className="bg-purple-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-purple-700"
+          onClick={handleLoadMore}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          disabled={isLoading}
+          >
+          {isLoading ? "Loading..." : "Load More"}
+          </motion.button>
+          )}
+          </div>
+          );
+          }
+          
+          export default Cards;
+          
+          
+          
+          
+          
+          
