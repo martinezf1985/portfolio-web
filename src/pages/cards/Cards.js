@@ -117,79 +117,62 @@
 
 
 
-import React, { useState, useEffect } from "react";
+
 import { motion } from "framer-motion";
 
-const cardTransition = {
-  type: "spring",
-  stiffness: 500,
-  damping: 30
-};
-
-const cardVariants = {
-  hover: {
-    y: -5,
-    boxShadow: "0 5px 20px rgba(148, 0, 211)",
-    scale: 1.02
-  },
-  tap: {
-    y: 0,
-    boxShadow: "0 3px 10px rgba(148, 0, 211)",
-    scale: 1
-  },
-  link: {
-    cursor: "pointer"
-  }
-};
+import React, { useState, useEffect } from "react";
 
 function Cards(props) {
   const { projects } = props;
-  const [currentPage, setCurrentPage] = useState(1);
-  const [projectList, setProjectList] = useState(projects.slice(0, 6));
+  const [projectFilter, setProjectFilter] = useState(projects.slice(0, 6));
+  const [showLoadMoreButton, setShowLoadMoreButton] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [page, setPage] = useState(1);
 
-  useEffect(() => {
-    const nextPage = currentPage + 1;
-    const projectsToAdd = projects.slice(currentPage * 6, nextPage * 6);
-    if (projectsToAdd.length > 0) {
-      setCurrentPage(nextPage);
-      setProjectList([...projectList, ...projectsToAdd]);
+  const cardTransition = {
+    type: "spring",
+    stiffness: 500,
+    damping: 30
+  };
+
+  const cardVariants = {
+    hover: {
+      y: -5,
+      boxShadow: "0 5px 20px rgba(148, 0, 211)",
+      scale: 1.02
+    },
+    tap: {
+      y: 0,
+      boxShadow: "0 3px 10px rgba(148, 0, 211)",
+      scale: 1
+    },
+    link: {
+      cursor: "pointer"
     }
-  }, [currentPage, projectList]);
+  };
 
   const handleClick = (event, link) => {
-    event.preventDefault();
-    window.open(link, "_blank");
+    // Agregar lógica de manejo de clics aquí si es necesario
   };
 
-  const handleScroll = (event) => {
-    const bottom =
-      event.target.scrollHeight - event.target.scrollTop ===
-      event.target.clientHeight;
-    if (bottom) {
-      setCurrentPage(currentPage + 1);
+  const handleLoadMore = () => {
+    setIsLoading(true);
+    setPage(page + 1);
+  };
+
+  useEffect(() => {
+    const filteredProjects = projects.slice(0, 6 * page);
+    setProjectFilter(filteredProjects);
+    if (filteredProjects.length >= projects.length) {
+      setShowLoadMoreButton(false);
     }
-  };
-
-  const [showModal, setShowModal] = useState(false);
-
-  const handleModal = () => {
-    setShowModal(!showModal);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // your submit logic here
-    setShowModal(false);
-  };
+    setIsLoading(false);
+  }, [page, projects]);
 
   return (
-    <div onScroll={handleScroll}>
+    <div>
       <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
-        {projectList.map((project) => (
+        {projectFilter.map((project) => (
           <motion.a
             href={project.link}
             target="_blank"
@@ -201,6 +184,8 @@ function Cards(props) {
             variants={cardVariants}
             transition={cardTransition}
             onClick={(event) => handleClick(event, project.link)}
+            aria-label={project.title}  // Agregar aria-label con la descripción del proyecto
+            title={project.title}  // Agregar title con la descripción del proyecto
           >
             <img src={project.image} alt={project.title} className="mb-4"/>
             <div className="p-4">
@@ -223,18 +208,27 @@ function Cards(props) {
               )}
               {project.location && (
                 <p className="text-white mb-2">
-                <strong>Type:</strong> {project.type}
-              </p>
-            )}
-          </div>
-        </motion.a>
-      ))}
-    </div>
-  </div>
-);
-}
-
-
-export default Cards;
-
+                  <strong>Type:</strong> {project.type}
+                </p>
+              )}
+            </div>
+          </motion.a>
+        ))}
+      </div>
+      <div className="flex justify-center mt-10">
+        {showLoadMoreButton && (
+          <button
+            className
+="bg-black hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full"
+                           onClick={handleLoadMore}
+                         >
+                  {isLoading ? "Loading..." : "Load More"}
+                  </button>
+                  )}
+                  </div>
+                  </div>
+                  );
+                  }
+                  
+                  export default Cards;
 
