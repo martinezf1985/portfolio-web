@@ -33,6 +33,8 @@ export const projects = [
     startDate: '22 febrero 2022',
     endDate: '22 mayo 2022',
     location: 'Caba, Buenos Aires, Argentina',
+    company: 'Udemy',
+    type: 'Proyecto individual',
     image: "/images/hero.jpg",
     link: "https://hero-app-theta.vercel.app/"
   }
