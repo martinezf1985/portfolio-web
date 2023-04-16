@@ -1,3 +1,10 @@
+// import Cert from '../pages/cursos/Certificados';
+// import coder from  '.././../public/images/coder.jpg'
+// import henryCert from  '.././../public/images/henryCert.jpg'
+// import p5cert from  '.././../public/images/p5cert.jpg'
+
+
+
 const certificates = [
     {
       id: 1,
