@@ -32,22 +32,28 @@ setError('Error al cargar la imagen'); // establecer el mensaje de error
 
   return (
     <motion.div
-      className="certificate-card bg-black rounded-lg overflow-hidden shadow-md text-white"
-      whileHover="hover"
-      whileTap="tap"
-      variants={cardVariants}
-      transition={cardTransition}
-    >
-      <img src={certificate.image} alt={certificate.title} className="mb-4" width="100%" onError={handleOnError} />
-      <div className="p-4">
-        <h3 className="text-xl font-medium mb-2">{certificate.title}</h3>
-        <p className="text-white mb-4">{certificate.description}</p>
-        <p className="text-white mb-2">
-        {certificate.id && <span className="text-white mb-2"><strong>ID:</strong> {certificate.id}</span>}
+  className="certificate-card bg-black rounded-lg overflow-hidden shadow-md text-white"
+  whileHover="hover"
+  whileTap="tap"
+  variants={cardVariants}
+  transition={cardTransition}
+>
+  {certificate && certificate.image && (
+    <img src={certificate.image} alt={certificate.title} className="mb-4" width="100%" onError={handleOnError} />
+  )}
+  <div className="p-4">
+    <h3 className="text-xl font-medium mb-2">{certificate.title}</h3>
+    <p className="text-white mb-4">{certificate.description}</p>
+    <p className="text-white mb-2">
+      {certificate && certificate.id && (
+        <span className="text-white mb-2">
+          <strong>ID:</strong> {certificate.id}
+        </span>
+      )}
+    </p>
+  </div>
+</motion.div>
 
-        </p>
-      </div>
-    </motion.div>
   );
 };
 
