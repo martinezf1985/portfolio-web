@@ -44,7 +44,7 @@ const CertificateCard = ({ certificate }) => {
         <img src={certificate.image} alt={certificate.title} className="mb-4" width="100%" onError={handleOnError} />
       )}
       <div className="p-4">
-        <h3 className="text-xl font-medium mb-2">{certificate.title ? certificate.title : 'No title provided'}</h3>
+        {/* <h3 className="text-xl font-medium mb-2">{certificate.title ? certificate.title : 'No title provided'}</h3> */}
         <p className="text-white mb-4">{certificate.description}</p>
         <p className="text-white mb-2">
           {certificate && certificate.id && (
