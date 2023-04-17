@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import certificates from '../../data/certificates';
-import CertificateCard from './CertificateCard';
+import CertificateCard from '../../components/CertificateCard';
 
 const Certificados = () => {
   const [showCertificates, setShowCertificates] = useState(false);

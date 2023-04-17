@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Cards from './Cards';
+import Cards from '../../components/Cards';
 import projects from '../../data/projects';
 
 const Proyectos = () => {
