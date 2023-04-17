@@ -22,7 +22,7 @@ const certificates = [
       id: 3,
       title: "introduccion al Desarrollo Web",
       description: "  Certificación de  introduccion al desarrollo web  otorgada por Plataforma 5.",
-      image: "/images/p5Cert.jpg",
+      image: "/images/p5cert2.jpg",
     },
   ];
   
