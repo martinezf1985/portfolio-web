@@ -5,7 +5,7 @@ import AboutMe from './me/AboutMe';
 import Footer from './footer/Footer';
 import Certificados from './cursos/Certificados';
 import Proyectos from './cards/Proyectos';
-
+import Skills from './sk/Skills'
 function Portfolio() {
   const [isClient, setIsClient] = useState(false);
 
@@ -22,7 +22,8 @@ function Portfolio() {
       <div className="relative z-10">
         <Nav />
         <AboutMe />
-        {/* <Ab/> */}
+        <br /> <br /> <br /> <br /> <br /> <br /> <br /><br /> <br /> <br />
+        <Skills/>
         <br /> <br /> <br /> <br /> <br /> <br /> <br /><br /> <br /> <br />
         <Proyectos />
         <br /> <br /> <br /> <br /> <br /> <br /> <br /><br /> <br />
