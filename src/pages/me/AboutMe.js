@@ -23,14 +23,16 @@ function AboutMe() {
 </div>
             <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-green-500 mb-8">
             Hola a todos!!!, mi nombre es <span className='text-blue-700 animate-pulse'>Fernando Martinez</span>. 
-              Soy Developer Fullstack, siempre fui una apasionado de la innovación tecnológica 
+               siempre fui una apasionado de la innovación tecnológica 
             </p>
             <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-green-500 mb-8">
-              Soy una persona dinámica y adaptable, capaz de enfrentar cualquier situación que requiera el proyecto en el que estoy trabajando. Mi objetivo es formar parte de empresas innovadoras, donde pueda trabajar en equipo con otros profesionales que se planteen desafíos y se exijan lo mejor de sí mismos cada día para entregar productos innovadores que satisfagan las necesidades del cliente.
+            Soy Developer Fullstack con orientación en front end, cuento con experiencia en proyectos
+enfocados a industrias(grupal e individual) usando tecnologías como HTML, CSS, JavaScript,
+TypeScript, React , Nextjs, NodeJs, Express, Firebase, Postgress SQL y MongoDB, con habilidades
+para trabajo en equipo usando metolodías scrum .
+Actualmente me encuentro en búsqueda de empleo como Developer Fullstack.
             </p>
-            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-green-500 mb-8">
-              Actualmente estoy en la búsqueda de empleo como desarrollador Fullstack, tengo experiencia en tecnologías como JavaScript con React y Nextjs para el Frontend, NodeJs con Express para el backend, Firebase, Postgress SQL y MongoDB para la base de datos.
-            </p>
+           
             <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl text-green-500 mb-8">
               Si estás interesado en mi perfil, ¡no dudes en contactarme a través de mi LinkedIn! Estaré encantado de conectarte y conversar sobre oportunidades laborales o proyectos interesantes. Puedes encontrarme en <Link href="https://www.linkedin.com/in/fernandoh-martinez/" className="text-blue-500 hover:underline animate-pulse">https://www.linkedin.com/in/fernandoh-martinez/</Link>
             </p>
