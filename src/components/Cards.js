@@ -1,62 +1,57 @@
-// import React, { useState, useEffect } from "react";
-
 // import { motion } from "framer-motion";
+// import React from "react";
 
+// function Cards({ projects }) {
+//   const [projectFilter, setProjectFilter] = React.useState([]);
+//   const [page, setPage] = React.useState(1);
+//   const [showLoadMoreButton, setShowLoadMoreButton] = React.useState(true);
+//   const [isLoading, setIsLoading] = React.useState(false);
 // const cardTransition = {
-//   type: "spring",
-//   stiffness: 500,
-//   damping: 30
-// };
-
+//     type: "spring",
+//     stiffness: 500,
+//     damping: 30
+//   };
 // const cardVariants = {
-//   hover: {
-//     y: -5,
-//     boxShadow: "0 5px 20px rgba(148, 0, 211)",
-//     scale: 1.02
-//   },
-//   tap: {
-//     y: 0,
-//     boxShadow: "0 3px 10px rgba(148, 0, 211)",
-//     scale: 1
-//   },
-//   link: {
-//     cursor: "pointer"
-//   }
-// };
-
-
-// function Cards(props) {
-//   const { projects } = props;
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const [projectList, setProjectList] = useState(projects.slice(0, 6));
-
-//   useEffect(() => {
-//     const nextPage = currentPage + 1;
-//     const projectsToAdd = projects.slice(currentPage * 6, nextPage * 6);
-//     if (projectsToAdd.length > 0) {
-//       setCurrentPage(nextPage);
-//       setProjectList([...projectList, ...projectsToAdd]);
+//     hover: {
+//       y: -5,
+//       boxShadow: "0 5px 20px rgba(148, 0, 211)",
+//       scale: 1.02
+//     },
+//     tap: {
+//       y: 0,
+//       boxShadow: "0 3px 10px rgba(148, 0, 211)",
+//       scale: 1
+//     },
+//     link: {
+//       cursor: "pointer"
 //     }
-//   }, [currentPage, projectList]);
-
-//   const handleClick = (event, link) => {
+//   };
+// React.useEffect(() => {
+//     setProjectFilter(projects.slice(0, 6));
+//     if (projects.length <= 6) {
+//       setShowLoadMoreButton(false);
+//     }
+//   }, [projects]);
+// const handleLoadMore = async () => {
+//     setIsLoading(true);
+//     const nextPage = page + 1;
+//     const response = await fetch(`/api/projects?page=${nextPage}`);
+//     const newProjects = await response.json();
+//     setProjectFilter([...projectFilter, ...newProjects]);
+//     setPage(nextPage);
+//     setIsLoading(false);
+//     if (newProjects.length === 0) {
+//       setShowLoadMoreButton(false);
+//     }
+//   };
+//  const handleClick = (event, link) => {
 //     event.preventDefault();
 //     window.open(link, "_blank");
 //   };
-
-//   const handleScroll = (event) => {
-//     const bottom =
-//       event.target.scrollHeight - event.target.scrollTop ===
-//       event.target.clientHeight;
-//     if (bottom) {
-//       setCurrentPage(currentPage + 1);
-//     }
-//   };
-
-//   return (
-//     <div onScroll={handleScroll}>
-//       <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
-//         {projectList.map((project) => (
+//  return (
+//     <div className="container mx-auto">
+//       <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+//         {projectFilter.map((project) => (
 //           <motion.a
 //             href={project.link}
 //             target="_blank"
@@ -68,52 +63,49 @@
 //             variants={cardVariants}
 //             transition={cardTransition}
 //             onClick={(event) => handleClick(event, project.link)}
+//             aria-label={project.title}
+//             title={project.title}
 //           >
-//             <img src={project.image} alt={project.title} className="mb-4"/>
+//             <img src={project.image} alt={project.title} className="mb-4" />
 //             <div className="p-4">
 //               <h3 className="text-xl font-medium mb-2">{project.title}</h3>
 //               <p className="text-white mb-4">{project.description}</p>
-//               <ul className="mb-4">
+//               <ul className="flex flex-wrap mb-4">
 //                 {project.technologies.map((technology) => (
-//                   <li className="inline-block bg-white  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2" key={technology}>
+//                   <li
+//                     className="inline-block bg-purple-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"
+//                     key={technology}
+//                   >
 //                     {technology}
 //                   </li>
 //                 ))}
 //               </ul>
-//               <p className="text-white mb-2">
+//               <p className="text-white">
 //                 <strong>Start Date:</strong> {project.startDate}
 //               </p>
-//               {project.endDate && (
-//                 <p className="text-white mb-2">
-//                   <strong>End Date:</strong> {project.endDate}
-//                 </p>
-//               )}
-//               {project.location && (
-//                 <p className="text-white mb-2">
-//                   <strong>Location:</strong> {project.location}
-//                 </p>
-//               )}
-//               {project.company && (
-//                 <p className="text-white mb-2">
-//                   <strong>Company:</strong> {project.company}
-//                 </p>
-//               )}
-//               {project.type && (
-//                 <p className="text-white mb-2">
-//                   <strong>Type:</strong> {project.type}
-//                 </p>
-//               )}
 //             </div>
 //           </motion.a>
 //         ))}
 //       </div>
-//     </div>
-//   );
-// }
+//       {showLoadMoreButton && (
+//         <motion.button
+//           className="bg-purple-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 mt-8 mx-auto block"
+//           onClick={handleLoadMore}
+//           disabled={isLoading}
+//           whileHover={{ scale: 1.05 }}
+//           whileTap={{ scale: 0.95 }}
+//           >
+//           {isLoading ? "Loading..." : "Load More"}
+//           </motion.button>
+//           )}
+//           </div>
+//           );
+//           }
+          
+//           export default Cards;
 
 
-// export default Cards;
-
+          
 
 
 
@@ -126,14 +118,12 @@ function Cards({ projects }) {
   const [page, setPage] = React.useState(1);
   const [showLoadMoreButton, setShowLoadMoreButton] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
-
-  const cardTransition = {
+const cardTransition = {
     type: "spring",
     stiffness: 500,
     damping: 30
   };
-
-  const cardVariants = {
+const cardVariants = {
     hover: {
       y: -5,
       boxShadow: "0 5px 20px rgba(148, 0, 211)",
@@ -148,15 +138,13 @@ function Cards({ projects }) {
       cursor: "pointer"
     }
   };
-
-  React.useEffect(() => {
+React.useEffect(() => {
     setProjectFilter(projects.slice(0, 6));
     if (projects.length <= 6) {
       setShowLoadMoreButton(false);
     }
   }, [projects]);
-
-  const handleLoadMore = async () => {
+const handleLoadMore = async () => {
     setIsLoading(true);
     const nextPage = page + 1;
     const response = await fetch(`/api/projects?page=${nextPage}`);
@@ -168,21 +156,19 @@ function Cards({ projects }) {
       setShowLoadMoreButton(false);
     }
   };
-
-  const handleClick = (event, link) => {
+ const handleClick = (event, link) => {
     event.preventDefault();
     window.open(link, "_blank");
   };
-
   return (
-    <div>
-      <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
+    <div className="container mx-auto">
+      <div className="card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
         {projectFilter.map((project) => (
           <motion.a
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="card bg-black rounded-lg overflow-hidden shadow-md text-white"
+            className="card bg-black rounded-lg overflow-hidden shadow-md text-white flex flex-col justify-between w-full"
             key={project.id}
             whileHover="hover"
             whileTap="tap"
@@ -192,21 +178,21 @@ function Cards({ projects }) {
             aria-label={project.title}
             title={project.title}
           >
-            <img src={project.image} alt={project.title} className="mb-4" />
+            <img src={project.image} alt={project.title} className="mb-4 w-full h-48 object-cover" />
             <div className="p-4">
               <h3 className="text-xl font-medium mb-2">{project.title}</h3>
               <p className="text-white mb-4">{project.description}</p>
-              <ul className="mb-4">
+              <ul className="flex flex-wrap mb-4">
                 {project.technologies.map((technology) => (
                   <li
-                    className="inline-block bg-white  rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                    className="inline-block bg-purple-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"
                     key={technology}
                   >
                     {technology}
                   </li>
                 ))}
               </ul>
-              <p className="text-white mb-2">
+              <p className="text-white">
                 <strong>Start Date:</strong> {project.startDate}
               </p>
             </div>
@@ -215,23 +201,22 @@ function Cards({ projects }) {
       </div>
       {showLoadMoreButton && (
         <motion.button
-          className="bg-purple-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-purple-700"
+          className="bg-purple-600 text-white py-2 px-6 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200 mt-8 mx-auto block"
           onClick={handleLoadMore}
+          disabled={isLoading}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          disabled={isLoading}
-          >
+        >
           {isLoading ? "Loading..." : "Load More"}
-          </motion.button>
-          )}
-          </div>
-          );
-          }
+        </motion.button>
+      )}
+    </div>
+  );
+  
+      }  
           
           export default Cards;
+
+
           
-          
-          
-          
-          
-          
+
