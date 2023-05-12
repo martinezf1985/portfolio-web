@@ -5,7 +5,7 @@ import Footer from './footer/Footer';
 import Certificados from './cursos/Certificados';
 import Proyectos from './cards/Proyectos';
 import Skills from './sk/Skills'
-
+// import  X from './X';
 
 function Portfolio() {
   const [isClient, setIsClient] = useState(false);
@@ -22,57 +22,28 @@ function Portfolio() {
       <div className="relative z-10">
         <Nav />
         <AboutMe />
-        <div className="mt-8"></div> {/* Add vertical spacing */}
+        <div className="my-40"></div> {/* Add vertical spacing */}
         <Skills/>
-        <div className="mt-8"></div> {/* Add vertical spacing */}
+        <div className="my-40"></div> {/* Add vertical spacing */}
         <Proyectos />
-        <div className="mt-8"></div> {/* Add vertical spacing */}
+        <div className="my-80"></div> {/* Add vertical spacing */}
         {isClient && <Certificados />}
-        <div className="mt-8"></div> {/* Add vertical spacing */}
+        
+        {/* <X/> */}
+        <div className="my-8"></div> {/* Add vertical spacing */}
         <Footer />
       </div>
+      
+      
     </div>
   );
+  
+
 }
 
 export default Portfolio;
 
 
-
-// function Portfolio() {
-//   const [isClient, setIsClient] = useState(false);
-
-//   useEffect(() => {
-//     setIsClient(true);
-//   }, []);
-
-//   return (
-//     <div className="relative min-h-screen">
-//       <video className="fixed left-0 top-0 w-screen h-screen object-cover z-0" autoPlay muted loop>
-//         <source src="/images/cover3.mp4" type="video/mp4" />
-//       </video>
-
-//       <div className="relative z-10">
-//         <Nav />
-//         <AboutMe />
-
-//         <div className="my-8"></div> {/* Agregar espaciado vertical */}
-//         <Skills/>
-
-//         <div className="my-8"></div> {/* Agregar espaciado vertical */}
-//         <Proyectos />
-
-//         <div className="my-8"></div> {/* Agregar espaciado vertical */}
-//         {isClient && <Certificados />}
-
-//         <div className="my-8"></div> {/* Agregar espaciado vertical */}
-//         <Footer />
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Portfolio;
 
 
 
