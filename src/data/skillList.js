@@ -71,6 +71,18 @@ const skillList = [
         name: 'Postman',
         iconUrl: ' https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg',
       },
+      {
+        name: 'Nestjs',
+        iconUrl: 'https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/nest-js-icon.png',
+      },
+      {
+        name: 'Prisma',
+        iconUrl: 'https://cdn.worldvectorlogo.com/logos/prisma-3.svg',
+      },
+      {
+        name: 'MySQL',
+        iconUrl: 'https://cdn.icon-icons.com/icons2/2699/PNG/512/mysql_official_logo_icon_169938.png',
+      },
     // Agrega más habilidades aquí
   ];
   export default skillList;
