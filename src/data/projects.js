@@ -37,7 +37,21 @@ export const projects = [
     type: 'Proyecto individual',
     image: "/images/hero.jpg",
     link: "https://hero-app-theta.vercel.app/"
+  },
+  {
+    id: 'project-3', // Asigna un valor único al id
+    title: 'Congresso Awaq',
+    description: '...',
+    technologies: ['Next js', 'Tailwindcss', 'Use.context'],
+    startDate: '22 febrero 2024',
+    endDate: '22 mayo 2024',
+    location: 'Caba, Buenos Aires, Argentina',
+    company: 'Awaq',
+    type: 'Proyecto grupal',
+    image: "/images/awaq.png",
+    link: "https://congreso.somosawaq.org/"
   }
+
 ];
 
 export default projects;
